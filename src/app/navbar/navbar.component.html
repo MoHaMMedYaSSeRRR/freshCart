@@ -1,0 +1,73 @@
+<nav #navBar class="navbar navbar-expand-lg navbar-light bg-transparent">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="assets/images/freshcart-logo.svg" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto">
+                <li *ngIf="islogin" class="nav-item">
+                    <a class="nav-link" routerLinkActive="bg-main text-white p-2 rounded-2" routerLink="home">Home</a>
+                </li>
+                <li *ngIf="islogin" class="nav-item">
+                    <a class="nav-link" routerLinkActive="bg-main text-white p-2 rounded-2" routerLink="products">Products</a>
+                </li>
+                <li *ngIf="islogin" class="nav-item">
+                    <a class="nav-link" routerLinkActive="bg-main text-white p-2 rounded-2" routerLink="categories">Categories</a>
+                </li>
+                <li *ngIf="islogin" class="nav-item">
+                    <a class="nav-link" routerLinkActive="bg-main text-white p-2 rounded-2" routerLink="brands">Brands</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li *ngIf="islogin" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user fa-2x text-main"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" routerLink="/forgotPassword" routerLinkActive="bg-main text-white rounded">
+                            Forgot Password
+                        </a>
+                    </div>
+                </li>
+               
+
+                <li *ngIf="islogin" class="nav-item">
+                    <a class="nav-link position-relative" routerLinkActive="p-2 rounded-2" routerLink="cart">
+                        <i class="fas fa-cart-shopping fa-2x text-main"></i>
+                        <span class="badge bg-info  position-absolute top-0 end-0">{{itemNumber}}</span>
+                    </a>
+                </li>
+                <li *ngIf="islogin" class="nav-item">
+                    <a class="nav-link position-relative" routerLinkActive="p-2 rounded-2" routerLink="/whishlist">
+                        <i class="fas fa-heart  fa-2x text-danger"></i>
+                        <span class="badge bg-info  position-absolute top-0 end-0">{{favNum}}</span>
+                    </a>
+                </li>
+
+                <li class="d-flex align-items-center">
+                    <a> <i class="fab mx-2 fa-instagram"></i></a>
+                    <a> <i class="fab mx-2 fa-facebook"></i></a>
+                    <a> <i class="fab mx-2 fa-tiktok"></i></a>
+                    <a> <i class="fab mx-2 fa-twitter"></i></a>
+                    <a> <i class="fab mx-2 fa-linkedin"></i></a>
+                    <a> <i class="fab mx-2 fa-youtube"></i></a>
+                </li>
+
+                <li *ngIf="!islogin" class="nav-item">
+                    <a class="nav-link" routerLinkActive="bg-main text-white p-2 rounded-2" routerLink="login">Login</a>
+                </li>
+                <li *ngIf="!islogin" class="nav-item me-1">
+                    <a class="nav-link" routerLinkActive="bg-main text-white p-2 rounded-2" routerLink="register">Register</a>
+                </li>
+                <li *ngIf="islogin" class="nav-item d-flex align-items-center">
+                    <span (click)="logOut()" role="button">LogOut</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

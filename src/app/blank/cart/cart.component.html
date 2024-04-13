@@ -1,0 +1,45 @@
+<section *ngIf="cartDetails; else msg" 
+    class="w-75 mx-auto bg-light p-4 mb-3 shadow rounded">
+    
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="h2">Shop Cart </h1>
+        <button (click)="clearCart()" class="btn btn-outline-danger"> Clear Cart </button>
+    </div>
+    <p text-muted> Total Price : <span class="text-main" >{{cartDetails.totalCartPrice | currency:" EGP "}}</span></p>
+
+    <div *ngFor="let item of cartDetails.products" class="row g-4 border-bottom py-4">
+            <div class="col-md-1">
+                <img class="w-100" [src]="item.product.imageCover" alt="">
+            </div>
+            <div class="col-md-11 d-flex justify-content-between align-items-center">
+                <div>
+                    <h3 class="h6">{{item.product.title}}</h3>
+                    <p class="text-main font-sm mb-1">
+                        price  : {{item.price | currency:" EGP "}}
+                    </p>
+                    <button (click)="removeItem(item.product._id)" class="btn text-main m-0 p-0">
+                        <i class="fas fa-trash-can"></i>
+                        Remove
+                    </button>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <button (click)="updateCount(item.product.id,item.count - 1)" class="btn btn-sm border-success">-</button>
+                    <span class="p-2">{{item.count}}</span>
+                    <button (click)="updateCount(item.product.id,item.count + 1)" class="btn btn-sm border-success">+</button>
+                </div>
+            </div>
+    </div>
+
+    <button [routerLink]="['/payment',cartDetails._id]" class="btn small mt-3 d-block ms-auto bg-main text-white">
+        Online Payment <img class="w-25" src="./assets/images/visa.svg" alt="">
+    </button>
+    
+</section>
+
+
+<ng-template #msg>
+    <h2 class="text-center"> your cart is empty ...</h2>
+
+    <button class="btn bg-main mt-4 d-block  mx-auto" routerLink="/home">Go to buy</button>
+</ng-template>

@@ -1,0 +1,10 @@
+<app-navbar></app-navbar>
+<div class="container main-section">
+  <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#1cb81c" type="ball-climbing-dot" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<button #scrollBtn *ngIf="authService.isAuthenticated()" (click)="scrollToTop()" class="scroll-btn d-none"><i
+    class="fa-solid fa-arrow-up"></i></button>

@@ -1,0 +1,41 @@
+<section class="mb-5" *ngIf="products.length >0">
+    <h2>Popular Products</h2>
+
+    <input type="text" class="form-control search w-75 mt-3 mb-3 mx-auto" placeholder="search..." [(ngModel)]="term">
+
+    <div class="row g-4 justify-content-center">
+        <div *ngFor='let product of products | search:term | paginate: { id: "con",
+        itemsPerPage: pageSize,
+        currentPage: p,
+        totalItems: total }' class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <div class="product p-1 position-relative">
+                <i *ngIf="!whishListData.includes($any(product._id))" (click)="addToFav(product._id)" role="button" class="fa-regular fa-heart heart position-absolute "></i>
+                <i *ngIf="whishListData.includes($any(product._id))" (click)="removeFromFav(product._id)" role="button" class="fa-solid fa-heart heart text-danger position-absolute "></i>
+
+                <header role="button" [routerLink]="['/productdetails',product._id]">
+                    <img class="w-100" [src]="product.imageCover" [alt]="product.title">
+                    <h4 class="h6 text-muted">{{product.category.name}}</h4>
+                    <h3 class="h6 text-main">{{product.title | cuttext:2}}</h3>
+                    <div class="d-flex justify-content-between align-items-center small">
+                        <h6 class="text-muted small">{{product.price |currency :"E£"}}</h6>
+                        <p>
+                            <i [class.rating-color]="product.ratingsAverage>=item" *ngFor="let item of [1,2,3,4,5]" class="fas small fa-star"></i>
+                            <span>{{product.ratingsAverage}}</span>
+                        </p>
+                    </div>
+                </header>
+                <button (click)="addToCart(product._id,addBtn)" #addBtn class="btn border-none text-white w-100  bg-main">Add To
+                    Cart</button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center mt-4">
+        <pagination-controls class="my-pagination" id="con" (pageChange)="pageChanged($event)"
+            (pageBoundsCorrection)="pageChanged($event)" [maxSize]="9" [directionLinks]="true" [autoHide]="true"
+            [responsive]="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+    </div>
+</section>
